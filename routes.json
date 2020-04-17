@@ -1,0 +1,75 @@
+{
+  "vehicles": [
+    {
+      "id": 1,
+      "start": [-81.2776, 29.7240],
+      "end": [-80.7123, 28.1],
+      "capacity": [4],
+      "skills": [1, 14],
+      "description": "vehicle 1",
+      "time_window": [28800, 43200]
+    },
+    {
+      "id": 2,
+      "start": [-81.2776, 29.2312],
+      "end": [-80.7123, 28.1],
+      "capacity": [4],
+      "skills": [2, 14],
+      "description": "vehicle 2",
+      "time_window": [28800, 43200]
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "service": 300,
+      "delivery": [1],
+      "location": [-81.3576, 29.5321],
+      "skills": [1],
+      "description": "job1",
+      "time_windows": [[32400, 36000]]
+    },
+    {
+      "id": 2,
+      "service": 300,
+      "delivery": [1],
+      "location": [-80.9321, 28.3423],
+      "skills": [1],
+      "description": "job 2"
+    },
+    {
+      "id": 5,
+      "service": 300,
+      "delivery": [1],
+      "description": "job 3",
+      "location": [-81.1231, 29.5112],
+      "skills": [14]
+    },
+    {
+      "id": 6,
+      "service": 300,
+      "delivery": [1],
+      "description": "job 4",
+      "location": [-81.1231, 29.2112],
+      "skills": [14]
+    }
+  ],
+  "shipments": [
+    {
+      "amount": [1],
+      "skills": [2],
+      "description": "pickup 1",
+      "pickup": {
+        "id": 4,
+        "service": 300,
+        "location": [-79.0231, 30.7240]
+      },
+      "delivery": {
+        "id": 3,
+        "service": 300,
+        "description": "pickup2",
+        "location": [-81.1231, 31.2312]
+      }
+    }
+  ]
+}

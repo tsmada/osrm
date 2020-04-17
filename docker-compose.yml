@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+    osrm:
+        build:
+            context: './osrm'
+            dockerfile: 'dockerfile'
+        container_name: 'osrm'
+        networks:
+            tsp_network:
+                aliases:
+                - osrm
+        ports:
+            - "5000:5000"
+        restart: always
+        volumes:
+            - ./osrm:/data
+    vroom-backend:
+        container_name: vroom-backend
+        image: iedmrc/vroom
+        restart: always
+        depends_on: ['osrm']
+        ports:
+            - "3000:3000"
+        networks:
+            tsp_network:
+                aliases:
+                - vroom-backend
+    vroom-frontend:
+        container_name: vroom-frontend
+        image: iedmrc/vroom-frontend
+        restart: always
+        ports:
+            - "9966:9966"
+        depends_on:
+            - vroom-backend
+        networks:
+            tsp_network:
+                aliases:
+                - vroom-frontend
+networks:
+  tsp_network:
+      driver: bridge

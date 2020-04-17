@@ -1,0 +1,16 @@
+FROM osrm/osrm-backend
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends wget && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /data
+RUN wget https://download.geofabrik.de/north-america/us-latest.osm.pbf --no-check-certificate
+RUN chmod -R 775 /data
+
+RUN  /usr/local/bin/osrm-extract -p /opt/car.lua /data/us-latest.osm.pbf && \
+     /usr/local/bin/osrm-partition /data/us-latest.osrm && \
+     /usr/local/bin/osrm-customize /data/us-latest.osrm
+
+
+ENTRYPOINT /usr/local/bin/osrm-routed --algorithm mld /data/us-latest.osrm
