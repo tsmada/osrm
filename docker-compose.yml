@@ -12,11 +12,13 @@ services:
         ports:
             - "5000:5000"
         restart: always
+        command: "osrm-routed --max-matching-size 1000 --max-table-size 1000 --max-viaroute-size 1000 --algorithm mld ./us-latest.osrm"
         volumes:
             - ./osrm:/data
     vroom-backend:
-        container_name: vroom-backend
-        image: iedmrc/vroom
+        build:
+            context: './backend'
+            dockerfile: 'dockerfile'
         restart: always
         depends_on: ['osrm']
         ports:
@@ -26,8 +28,9 @@ services:
                 aliases:
                 - vroom-backend
     vroom-frontend:
-        container_name: vroom-frontend
-        image: iedmrc/vroom-frontend
+        build:
+            context: './frontend'
+            dockerfile: 'dockerfile'
         restart: always
         ports:
             - "9966:9966"
